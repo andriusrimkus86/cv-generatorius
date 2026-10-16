@@ -25,4 +25,6 @@ export interface TemplateDef {
   component: ComponentType<TemplateProps>;
   /** Fono spalva, kuria spausdinant užpildomi visi puslapiai (kad šoninė juosta tęstųsi). */
   pageBackground: (theme: Theme) => string;
+  /** PDF versijos komponentas (react-pdf). Įkeliamas tik prireikus, nes biblioteka didelė. */
+  loadPdf: () => Promise<ComponentType<TemplateProps>>;
 }

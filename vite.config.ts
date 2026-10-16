@@ -5,7 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 // base: './' leidžia talpinti programėlę bet kuriame kataloge (pvz. GitHub Pages /cv-generatorius/)
 export default defineConfig({
   base: './',
-  build: { chunkSizeWarningLimit: 800 },
+  build: { chunkSizeWarningLimit: 1300 },
   plugins: [
     react(),
     VitePWA({
@@ -31,7 +31,9 @@ export default defineConfig({
       },
       workbox: {
         // Viskas (JS, CSS, šriftai, paveikslėliai) talpinama iš anksto, kad veiktų be interneto.
-        globPatterns: ['**/*.{js,css,html,woff2,png,jpg,svg,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,woff2,ttf,png,jpg,svg,webmanifest}'],
+        // PDF generatoriaus (react-pdf) failas didesnis nei numatytoji 2 MB riba.
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
       },

@@ -6,7 +6,7 @@ import { deleteDocument, duplicateDocument, renameDocument, setActiveDocument } 
 import { exportProfiles } from '../io/json';
 import { PreviewPane } from '../preview/PreviewPane';
 import { PrintRoot } from '../preview/PrintRoot';
-import { printCv } from '../preview/print';
+import { PdfDialog } from '../pdf/PdfDialog';
 import { useEditorStore } from '../store/useEditorStore';
 import { THEMES } from '../templates/themes';
 import { IconBack, IconCopy, IconDownload, IconEdit, IconPdf, IconTrash } from '../ui/icons';
@@ -26,6 +26,7 @@ export function EditorPage() {
   const [missing, setMissing] = useState(false);
   const [tab, setTab] = useState<Tab>('edit');
   const [personalOpen, setPersonalOpen] = useState(true);
+  const [pdfOpen, setPdfOpen] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -96,7 +97,7 @@ export function EditorPage() {
             {saving === 'pending' ? 'Saugoma…' : saving === 'error' ? 'Klaida saugant!' : 'Išsaugota'}
           </small>
         </div>
-        <button type="button" className="btn btn-primary" onClick={() => printCv(doc)}>
+        <button type="button" className="btn btn-primary" onClick={() => setPdfOpen(true)}>
           <IconPdf /> <span className="hide-xs">Išsaugoti</span> PDF
         </button>
       </header>
@@ -185,6 +186,7 @@ export function EditorPage() {
       </div>
 
       <PrintRoot doc={doc} />
+      {pdfOpen && <PdfDialog doc={doc} onClose={() => setPdfOpen(false)} />}
     </div>
   );
 }

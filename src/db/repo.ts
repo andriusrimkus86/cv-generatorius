@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import seedPhotoUrl from '../assets/placeholder-avatar.svg';
+import seedPhotoUrl from '../assets/placeholder-avatar.png';
 import { cloneWithNewIds, createEmptyData } from '../model/defaults';
 import { createSeedData } from '../model/seed';
 import type { CvData, CvDocument, Profile } from '../model/types';

@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import seedPhotoUrl from '../assets/placeholder-avatar.svg';
+import seedPhotoUrl from '../assets/placeholder-avatar.png';
 import type { Bullet, CvData, Tag, TimelineItem } from './types';
 
 const bullets = (...texts: string[]): Bullet[] => texts.map((text) => ({ id: nanoid(), text }));

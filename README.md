@@ -44,11 +44,17 @@ npm run preview
 
 ## PDF išsaugojimas
 
-Paspauskite **PDF**. Atsidarys naršyklės spausdinimo langas:
+Paspauskite **PDF**. Programėlė pati sugeneruoja PDF failą (A4, tekstą galima pažymėti, šriftai įterpti).
+Tai veikia ir telefone, ir be interneto. Lange galima:
 
-- **Windows (Chrome / Edge):** paskirtis „Išsaugoti kaip PDF“, popierius A4, paraštės „Nėra“ arba „Numatytosios“.
-  Pažymėkite „Fono grafika“, jei ji neįjungta automatiškai.
-- **Android (Chrome):** pasirinkite spausdintuvą „Išsaugoti kaip PDF“ ir spauskite PDF piktogramą.
+- **Atsisiųsti:** failas išsaugomas į „Atsisiuntimai“ (Downloads).
+- **Dalintis / išsaugoti…** (telefone): Android dalinimosi langas, pvz. į Google Drive, el. paštą ar Failus.
+- **Atidaryti:** peržiūrėti PDF naršyklėje.
+- **Spausdinti…** (kompiuteryje): senasis būdas per naršyklės spausdinimo langą. Paskirtis „Išsaugoti kaip PDF“,
+  pažymėkite „Fono grafika“. Įdiegtoje Android programėlėje spausdinimo langas neveikia.
+
+PDF kuria `@react-pdf/renderer` pagal `src/templates/classic/ClassicPdf.tsx`. Šis failas turi atitikti ekrano
+šabloną `ClassicTemplate.tsx` ir `classic.css`, todėl keičiant dizainą reikia keisti abu.
 
 Ilgas CV automatiškai persikelia į antrą puslapį. Įrašai nėra perkerpami per vidurį, o tamsi šoninė juosta
 tęsiasi visuose puslapiuose. Peržiūroje raudona brūkšninė linija rodo apytikslę puslapio ribą.

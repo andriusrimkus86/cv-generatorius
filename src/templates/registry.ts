@@ -8,6 +8,7 @@ export const TEMPLATES: TemplateDef[] = [
     component: ClassicTemplate,
     pageBackground: (t) =>
       `linear-gradient(to right, ${t.sidebarBg} ${CLASSIC_SIDEBAR_WIDTH}, #fff ${CLASSIC_SIDEBAR_WIDTH})`,
+    loadPdf: () => import('./classic/ClassicPdf').then((m) => m.ClassicPdf),
   },
 ];
 

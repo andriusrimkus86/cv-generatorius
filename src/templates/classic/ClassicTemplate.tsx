@@ -1,13 +1,12 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { formatDate, formatPeriod } from '../../model/dates';
+import { formatPeriod } from '../../model/dates';
 import type { CvData, KeyValue, Placement, Section, TimelineItem } from '../../model/types';
+import { contactItems, licenceFields, nonEmpty, personalFields, visible } from '../common';
 import type { TemplateProps } from '../types';
 import { MailIcon, PhoneIcon, PinIcon } from './icons';
 import './classic.css';
 
 export const CLASSIC_SIDEBAR_WIDTH = '67mm';
-
-const visible = <T extends { hidden?: boolean }>(items: T[]) => items.filter((i) => !i.hidden);
 
 export function ClassicTemplate({ data, theme }: TemplateProps) {
   const { personal } = data;
@@ -24,11 +23,8 @@ export function ClassicTemplate({ data, theme }: TemplateProps) {
     '--cvc-line': theme.line,
   } as CSSProperties;
 
-  const contacts = [
-    { icon: <PinIcon />, value: personal.address },
-    { icon: <PhoneIcon />, value: personal.phone },
-    { icon: <MailIcon />, value: personal.email },
-  ].filter((c) => c.value.trim());
+  const icons = { address: <PinIcon />, phone: <PhoneIcon />, email: <MailIcon /> };
+  const contacts = contactItems(data).map((c) => ({ icon: icons[c.kind], value: c.value }));
 
   const render = (placement: Placement) =>
     sections
@@ -106,20 +102,11 @@ function renderSectionBody(s: Section, data: CvData, placement: Placement): Reac
     case 'keyValue':
       return renderKeyValues(visible(s.items));
 
-    case 'personal': {
-      const p = data.personal;
-      const fields: KeyValue[] = [];
-      if (p.birthDate) fields.push({ id: 'birth', label: 'Gimimo data', value: formatDate(p.birthDate) });
-      if (p.maritalStatus) fields.push({ id: 'marital', label: 'Šeimyninė padėtis', value: p.maritalStatus });
-      fields.push(...visible(p.customFields));
-      return renderKeyValues(fields);
-    }
+    case 'personal':
+      return renderKeyValues(personalFields(data));
 
-    case 'licence': {
-      const value = data.personal.drivingLicence?.trim();
-      if (!value) return null;
-      return renderKeyValues([{ id: 'licence', label: 'Vairuotojo pažymėjimas', value }]);
-    }
+    case 'licence':
+      return renderKeyValues(licenceFields(data));
 
     case 'timeline': {
       const items = visible(s.items);
@@ -146,7 +133,7 @@ function renderSectionBody(s: Section, data: CvData, placement: Placement): Reac
 }
 
 function renderKeyValues(items: KeyValue[]) {
-  const shown = items.filter((i) => i.label.trim() || i.value.trim());
+  const shown = nonEmpty(items);
   if (!shown.length) return null;
   return (
     <dl className="cvc-kv">

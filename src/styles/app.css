@@ -360,6 +360,17 @@ fieldset:disabled select {
   gap: 8px;
 }
 
+.pdf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal-actions .btn-small {
+  margin-right: auto;
+  align-self: center;
+}
+
 .cropper-box {
   position: relative;
   height: min(60vh, 360px);
