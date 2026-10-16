@@ -1,0 +1,356 @@
+/* Klasikinis šablonas. Matmenys mm/pt, kad ekrane ir PDF sutaptų. */
+
+.cv-classic {
+  --cvc-pad-y: 9mm;
+  display: flex;
+  align-items: stretch;
+  width: 210mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  background: linear-gradient(to right, var(--cvc-sidebar-bg) var(--cvc-sidebar-w), #fff var(--cvc-sidebar-w));
+  font-family: 'Lato2', 'Lato', sans-serif;
+  font-size: 9pt;
+  line-height: 1.41;
+  color: var(--cvc-text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.cv-classic *,
+.cv-classic *::before,
+.cv-classic *::after {
+  box-sizing: border-box;
+}
+
+.cv-classic h1,
+.cv-classic h2,
+.cv-classic p,
+.cv-classic ul,
+.cv-classic dl,
+.cv-classic dd {
+  margin: 0;
+  padding: 0;
+}
+
+.cv-classic ul {
+  list-style: none;
+}
+
+/* Viršutinis tarpas kartojamas kiekviename puslapyje (box-decoration-break: clone). */
+.cvc-sidebar,
+.cvc-main {
+  padding-top: var(--cvc-pad-y);
+  padding-bottom: var(--cvc-pad-y);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ---------- Šoninė juosta ---------- */
+
+.cvc-sidebar {
+  flex: 0 0 var(--cvc-sidebar-w);
+  padding-top: 8mm;
+  width: var(--cvc-sidebar-w);
+  padding-left: 9.4mm;
+  padding-right: 9.4mm;
+  color: var(--cvc-sidebar-text);
+}
+
+.cvc-photo {
+  display: block;
+  width: 37.5mm;
+  height: 37.5mm;
+  margin: 0 auto 7.2mm;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cvc-heading {
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 12.5pt;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  break-after: avoid;
+}
+
+.cvc-sidebar .cvc-heading {
+  color: var(--cvc-accent);
+  margin-bottom: 4.6mm;
+}
+
+.cvc-sidebar .cvc-section {
+  padding: 0 0 6.6mm;
+}
+
+.cvc-sidebar .cvc-section + .cvc-section {
+  border-top: 0.3mm solid var(--cvc-sidebar-line);
+  padding-top: 7.3mm;
+}
+
+.cvc-sidebar .cvc-text {
+  white-space: pre-line;
+}
+
+.cvc-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.9mm;
+}
+
+.cvc-tags li {
+  max-width: 47mm;
+  padding: 1.6mm 3.3mm 1.5mm;
+  border: 0.35mm solid var(--cvc-accent);
+  border-radius: 0.8mm;
+  font-size: 8.7pt;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  break-inside: avoid;
+}
+
+.cvc-sidebar .cvc-tags li {
+  color: var(--cvc-sidebar-text);
+}
+
+.cvc-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4mm;
+}
+
+.cvc-kv-row {
+  break-inside: avoid;
+}
+
+.cvc-kv-label {
+  font-weight: 700;
+}
+
+.cvc-sidebar .cvc-kv-label {
+  color: var(--cvc-sidebar-strong);
+}
+
+.cvc-timeline-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.cvc-tl-compact-item {
+  break-inside: avoid;
+}
+
+/* ---------- Pagrindinė dalis ---------- */
+
+.cvc-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 6.3mm;
+  padding-right: 7.1mm;
+}
+
+.cvc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6mm;
+  padding-top: 7.3mm;
+  margin-bottom: 12.8mm;
+  break-inside: avoid;
+}
+
+.cvc-name {
+  display: flex;
+  flex-direction: column;
+  padding-top: 4.6mm;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 28pt;
+  line-height: 0.88;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  color: var(--cvc-text);
+}
+
+.cvc-contacts {
+  flex: 0 0 52mm;
+  width: 52mm;
+  padding-top: 0.6mm;
+  color: var(--cvc-muted);
+}
+
+.cvc-contacts li {
+  display: flex;
+  align-items: center;
+  gap: 2.8mm;
+  padding: 1.1mm 0 1.3mm;
+  line-height: 1.35;
+}
+
+.cvc-contacts li + li {
+  border-top: 0.25mm solid var(--cvc-line);
+}
+
+.cvc-contact-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  width: 3.2mm;
+  justify-content: center;
+  font-size: 9pt;
+  color: var(--cvc-accent);
+}
+
+.cvc-main .cvc-section + .cvc-section {
+  margin-top: 15mm;
+}
+
+.cvc-main .cvc-heading {
+  color: var(--cvc-text);
+  padding-bottom: 2.2mm;
+  border-bottom: 0.25mm solid var(--cvc-line);
+  margin-bottom: 3.6mm;
+}
+
+.cvc-main .cvc-text {
+  color: var(--cvc-muted);
+  white-space: pre-line;
+}
+
+.cvc-main .cvc-tags {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cvc-main .cvc-kv {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 5mm;
+  row-gap: 1.6mm;
+}
+
+.cvc-main .cvc-kv-row {
+  display: contents;
+}
+
+.cvc-main .cvc-kv dd {
+  color: var(--cvc-muted);
+}
+
+.cvc-bullets li {
+  position: relative;
+  padding-left: 3.3mm;
+  color: var(--cvc-muted);
+  font-size: 8.5pt;
+  line-height: 1.38;
+  break-inside: avoid;
+}
+
+.cvc-bullets li + li {
+  margin-top: 2mm;
+}
+
+.cvc-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0.2mm;
+  top: 0.5em;
+  width: 1.1mm;
+  height: 1.1mm;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.cvc-main > .cvc-section > .cvc-bullets,
+.cvc-sidebar .cvc-bullets {
+  margin-top: 0;
+}
+
+.cvc-sidebar .cvc-bullets li {
+  color: var(--cvc-sidebar-text);
+}
+
+/* ---------- Laiko juosta ---------- */
+
+.cvc-tl-item {
+  display: grid;
+  grid-template-columns: 31.5mm 7.7mm 1fr;
+  break-inside: avoid;
+}
+
+.cvc-tl-left {
+  padding-right: 2mm;
+  padding-bottom: 5.8mm;
+}
+
+.cvc-tl-org {
+  font-weight: 700;
+  font-size: 7.9pt;
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--cvc-text);
+}
+
+.cvc-tl-date {
+  margin-top: 0.1mm;
+  color: var(--cvc-muted);
+}
+
+.cvc-tl-rail {
+  position: relative;
+}
+
+.cvc-tl-rail::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 0.35mm;
+  margin-left: -0.175mm;
+  background: var(--cvc-accent);
+}
+
+.cvc-tl-item:first-child .cvc-tl-rail::before {
+  top: 1.6mm;
+}
+
+.cvc-tl-rail::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0.55mm;
+  width: 2.3mm;
+  height: 2.3mm;
+  margin-left: -1.15mm;
+  border-radius: 50%;
+  background: var(--cvc-accent);
+}
+
+.cvc-tl-right {
+  padding-left: 0.6mm;
+  padding-bottom: 5.8mm;
+}
+
+.cvc-tl-item:last-child .cvc-tl-left,
+.cvc-tl-item:last-child .cvc-tl-right {
+  padding-bottom: 0;
+}
+
+.cvc-tl-title {
+  font-weight: 700;
+  font-size: 8.9pt;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  color: var(--cvc-text);
+}
+
+.cvc-tl-right .cvc-bullets {
+  margin-top: 2.6mm;
+}

@@ -1,0 +1,11 @@
+node_modules
+dist
+dev-dist
+*.local
+.vite
+.claude/
+*.tsbuildinfo
+
+# Asmeniniai duomenys (tikras CV, nuotrauka, JSON eksportai) neįkeliami į git
+reference/
+*.cv.json

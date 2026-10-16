@@ -1,0 +1,19 @@
+/*
+ * Lato 2.0 (paketas lato-font): Google Fonts / @fontsource Lato versijoje nėra raidžių ė, ų, į, ū, č,
+ * todėl naudojame pilną 2.0 versiją. Šriftai įtraukiami į build'ą ir veikia be interneto.
+ */
+@font-face {
+  font-family: 'Lato2';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../../node_modules/lato-font/fonts/lato-normal/lato-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lato2';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('../../node_modules/lato-font/fonts/lato-bold/lato-bold.woff2') format('woff2');
+}

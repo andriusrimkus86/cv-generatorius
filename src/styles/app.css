@@ -1,0 +1,375 @@
+:root {
+  --ui-bg: #eef0f3;
+  --ui-surface: #fff;
+  --ui-surface-2: #f6f7f9;
+  --ui-text: #1f2733;
+  --ui-muted: #6b7280;
+  --ui-border: #d7dbe1;
+  --ui-primary: #2e3a4b;
+  --ui-accent: #a8894a;
+  --ui-accent-dark: #8c7039;
+  --ui-danger: #b42318;
+  --ui-focus: #3b82f6;
+  --app-bar-h: 56px;
+  font-family: 'Lato2', system-ui, sans-serif;
+  color: var(--ui-text);
+  background: var(--ui-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--ui-bg);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+h2 {
+  font-size: 17px;
+}
+
+h3 {
+  font-size: 15px;
+}
+
+.page-center {
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  min-height: 60vh;
+  padding: 16px;
+  text-align: center;
+  color: var(--ui-muted);
+}
+
+/* ---------- Viršutinė juosta ---------- */
+
+.app-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--app-bar-h);
+  padding: 0 12px;
+  padding-top: env(safe-area-inset-top);
+  background: var(--ui-primary);
+  color: #fff;
+}
+
+.app-bar-title {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.app-bar-title strong {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;
+}
+
+.save-status {
+  font-size: 12px;
+  color: #c9cfd7;
+}
+
+.save-status.error {
+  color: #ffb4a8;
+  font-weight: 700;
+}
+
+/* ---------- Mygtukai ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 14px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  font: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: #b9bfc8;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn-primary {
+  border-color: var(--ui-accent);
+  background: var(--ui-accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  border-color: var(--ui-accent-dark);
+  background: var(--ui-accent-dark);
+}
+
+.btn-small {
+  min-height: 36px;
+  padding: 4px 10px;
+  font-size: 13px;
+  align-self: flex-start;
+}
+
+.btn.danger {
+  color: var(--ui-danger);
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ui-muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.icon-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--ui-text);
+}
+
+.icon-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.icon-btn.active {
+  color: var(--ui-accent-dark);
+  background: rgba(168, 137, 74, 0.14);
+}
+
+.icon-btn.danger:hover:not(:disabled) {
+  color: var(--ui-danger);
+}
+
+.icon-btn.on-dark {
+  color: #fff;
+}
+
+.icon-btn.on-dark:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.drag-handle {
+  cursor: grab;
+  touch-action: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 1px;
+}
+
+/* ---------- Formos ---------- */
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field-label {
+  padding: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ui-muted);
+}
+
+input:not([type='checkbox']):not([type='range']):not([type='file']),
+select,
+textarea {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  /* 16px, kad telefonas nepriartintų lauko */
+  font: inherit;
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.4;
+  overflow: hidden;
+  field-sizing: content;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--ui-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+fieldset:disabled input,
+fieldset:disabled select {
+  opacity: 0.5;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+}
+
+.month-year-row {
+  display: grid;
+  grid-template-columns: 1fr 90px;
+  gap: 6px;
+}
+
+.hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ui-muted);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--ui-surface);
+  box-shadow: 0 1px 2px rgba(20, 30, 45, 0.08);
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.notice.ok {
+  background: #e7f6ec;
+  color: #14532d;
+}
+
+.notice.error {
+  background: #fdecea;
+  color: #7a1c12;
+}
+
+.notice-close {
+  border: 0;
+  background: none;
+  font-size: 20px;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ---------- Modalinis langas ---------- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(15, 20, 30, 0.55);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(480px, 100%);
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--ui-surface);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cropper-box {
+  position: relative;
+  height: min(60vh, 360px);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #222;
+}
+
+@media (max-width: 420px) {
+  .hide-xs {
+    display: none;
+  }
+}

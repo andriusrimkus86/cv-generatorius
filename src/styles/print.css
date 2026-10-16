@@ -1,0 +1,32 @@
+@page {
+  size: A4;
+  margin: 0;
+}
+
+.print-root {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #root {
+    display: none !important;
+  }
+
+  .print-root {
+    display: block;
+  }
+
+  /* Paskutinis puslapis užpildomas fonu ant <html>, todėl paties CV aukščio neforsuojame. */
+  .print-root .cv-classic {
+    min-height: 0;
+    background: transparent;
+  }
+}
