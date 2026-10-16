@@ -41,7 +41,7 @@ export function ClassicTemplate({ data, theme }: TemplateProps) {
       });
 
   return (
-    <div className="cv-classic" style={vars}>
+    <div className="cv-sheet cv-classic" style={vars}>
       <aside className="cvc-sidebar">
         {personal.photo && <img className="cvc-photo" src={personal.photo} alt="" />}
         {render('sidebar')}

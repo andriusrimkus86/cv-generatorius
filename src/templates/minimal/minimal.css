@@ -1,0 +1,265 @@
+/* Šablonas „Minimalus“. Matmenys mm/pt, kad ekrane, spausdinant ir PDF sutaptų. */
+
+.cv-minimal {
+  width: 210mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  background: #fff;
+  font-family: 'Lato2', 'Lato', sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--cvn-text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.cv-minimal *,
+.cv-minimal *::before,
+.cv-minimal *::after {
+  box-sizing: border-box;
+}
+
+.cv-minimal :is(h1, h2, p, ul, dl, dd) {
+  margin: 0;
+  padding: 0;
+}
+
+.cv-minimal ul {
+  list-style: none;
+}
+
+/* ---------- Antraštė ---------- */
+
+.cvn-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8mm;
+  margin: 0 14mm;
+  padding: 14mm 0 5mm;
+  border-bottom: 0.6mm solid var(--cvn-accent);
+  break-inside: avoid;
+}
+
+.cvn-header-text {
+  min-width: 0;
+}
+
+.cvn-name {
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 36pt;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--cvn-text);
+}
+
+.cvn-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1mm 0;
+  margin-top: 2.6mm;
+  font-size: 8.5pt;
+  line-height: 1.3;
+  color: var(--cvn-muted);
+}
+
+.cvn-contacts li + li::before {
+  content: '·';
+  margin: 0 2.4mm;
+  color: var(--cvn-accent);
+  font-weight: 700;
+}
+
+.cvn-photo {
+  flex: 0 0 auto;
+  width: 24mm;
+  height: 24mm;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---------- Skiltys ---------- */
+
+.cvn-body {
+  display: flex;
+  align-items: stretch;
+  margin: 0 14mm;
+}
+
+.cvn-aside,
+.cvn-main {
+  padding-top: 7mm;
+  padding-bottom: 14mm;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.cvn-aside {
+  flex: 0 0 calc(var(--cvn-aside-w) - 14mm);
+  width: calc(var(--cvn-aside-w) - 14mm);
+  padding-right: 6mm;
+}
+
+.cvn-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 6mm;
+  border-left: 0.25mm solid var(--cvn-line);
+}
+
+.cv-minimal .cvx-section + .cvx-section {
+  margin-top: 7mm;
+}
+
+.cv-minimal .cvx-heading {
+  margin-bottom: 3mm;
+  font-size: 8.6pt;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cvn-accent);
+  break-after: avoid;
+}
+
+.cv-minimal .cvx-text {
+  color: var(--cvn-muted);
+  white-space: pre-line;
+}
+
+/* Žymos */
+.cv-minimal .cvx-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2mm 4mm;
+}
+
+.cvn-aside .cvx-tags {
+  flex-direction: column;
+}
+
+.cv-minimal .cvx-tags li {
+  position: relative;
+  padding-left: 3mm;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+
+.cv-minimal .cvx-tags li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 1.2mm;
+  height: 1.2mm;
+  background: var(--cvn-accent);
+}
+
+/* Pavadinimas: reikšmė */
+.cv-minimal .cvx-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.cv-minimal .cvx-kv-row {
+  break-inside: avoid;
+}
+
+.cv-minimal .cvx-kv-label {
+  font-weight: 700;
+}
+
+.cv-minimal .cvx-kv-value {
+  color: var(--cvn-muted);
+}
+
+/* Punktai */
+.cv-minimal .cvx-bullets li {
+  position: relative;
+  padding-left: 3.6mm;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: var(--cvn-muted);
+  break-inside: avoid;
+}
+
+.cv-minimal .cvx-bullets li + li {
+  margin-top: 1.4mm;
+}
+
+.cv-minimal .cvx-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 2mm;
+  height: 0.3mm;
+  background: var(--cvn-accent);
+}
+
+/* Laiko juosta: pagrindinė dalis */
+.cvn-main .cvx-tl-item {
+  display: grid;
+  grid-template-columns: 27mm 1fr;
+  grid-template-areas:
+    'date title'
+    'date org'
+    'date bullets';
+  column-gap: 4mm;
+  align-content: start;
+  padding-bottom: 5mm;
+  break-inside: avoid;
+}
+
+.cvn-main .cvx-tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.cv-minimal .cvx-tl-date {
+  grid-area: date;
+  font-size: 8.2pt;
+  line-height: 1.55;
+  color: var(--cvn-muted);
+}
+
+.cv-minimal .cvx-tl-title {
+  grid-area: title;
+  font-weight: 700;
+  font-size: 9.4pt;
+  line-height: 1.35;
+}
+
+.cv-minimal .cvx-tl-org {
+  grid-area: org;
+  font-size: 8.6pt;
+  color: var(--cvn-muted);
+}
+
+.cv-minimal .cvx-tl .cvx-bullets {
+  grid-area: bullets;
+  margin-top: 1.8mm;
+}
+
+/* Laiko juosta: šoninė skiltis */
+.cv-minimal .cvx-tl-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.cv-minimal .cvx-tl-compact .cvx-tl-item {
+  display: flex;
+  flex-direction: column;
+  break-inside: avoid;
+}
+
+.cv-minimal .cvx-tl-compact .cvx-tl-date {
+  order: 3;
+}
+
+.cv-minimal .cvx-tl-compact .cvx-bullets {
+  order: 4;
+}

@@ -131,9 +131,20 @@ reference/    Asmeniniai failai (neįkeliami į git, žr. .gitignore)
 
 ### Naujas šablonas
 
-1. Sukurkite komponentą `src/templates/<pavadinimas>/` su props `{ data, theme }` (žr. `templates/types.ts`).
-2. Užregistruokite jį `src/templates/registry.ts` (`pageBackground` nusako, kuo užpildomi visi PDF puslapiai).
-3. Naujos spalvų temos pridedamos `src/templates/themes.ts`.
+Yra trys šablonai: **Klasikinis** (`classic/`), **Modernus** (`modern/`) ir **Minimalus** (`minimal/`).
+Kiekvienas turi dvi versijas: ekrano ir spausdinimo (`*Template.tsx` ir CSS) bei atsisiunčiamo PDF (`*Pdf.tsx`).
+Šablonai „Modernus“ ir „Minimalus“ naudoja bendrą sekcijų atvaizdavimą:
+`shared/HtmlSections.tsx` (klasės `cvx-*`) ir `shared/PdfSections.tsx`.
+
+Naujas šablonas:
+
+1. Sukurkite `src/templates/<pavadinimas>/` su ekrano komponentu (props `{ data, theme }`, šakninė klasė `cv-sheet`)
+   ir PDF komponentu (žr. `templates/types.ts`).
+2. Užregistruokite jį `src/templates/registry.ts`. `pageBackground` nusako, kuo spausdinant užpildomi visi puslapiai,
+   o `loadPdf` įkelia PDF versiją.
+3. Pridėkite miniatiūrą `src/editor/DesignPicker.tsx` (`Thumb`).
+
+Spalvų temos pridedamos `src/templates/themes.ts` ir tinka visiems šablonams.
 
 ### Šriftai
 

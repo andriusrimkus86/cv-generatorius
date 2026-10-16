@@ -8,7 +8,7 @@ import { PreviewPane } from '../preview/PreviewPane';
 import { PrintRoot } from '../preview/PrintRoot';
 import { PdfDialog } from '../pdf/PdfDialog';
 import { useEditorStore } from '../store/useEditorStore';
-import { THEMES } from '../templates/themes';
+import { DesignPicker } from './DesignPicker';
 import { IconBack, IconCopy, IconDownload, IconEdit, IconPdf, IconTrash } from '../ui/icons';
 import { PersonalForm } from './PersonalForm';
 import { SectionsPanel } from './SectionsPanel';
@@ -146,18 +146,7 @@ export function EditorPage() {
                 </button>
               </div>
             </div>
-            {THEMES.length > 1 && (
-              <label className="field">
-                <span className="field-label">Spalvų tema</span>
-                <select value={doc.themeId} onChange={(e) => setDocFields({ themeId: e.target.value })}>
-                  {THEMES.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
+            <DesignPicker templateId={doc.templateId} themeId={doc.themeId} onChange={setDocFields} />
           </section>
 
           <section className="panel">

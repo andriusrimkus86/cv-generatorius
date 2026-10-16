@@ -1,0 +1,291 @@
+/* Šablonas „Modernus“. Matmenys mm/pt, kad ekrane, spausdinant ir PDF sutaptų. */
+
+.cv-modern {
+  width: 210mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #fff calc(100% - var(--cvm-aside-w)), var(--cvm-tint) calc(100% - var(--cvm-aside-w)));
+  font-family: 'Lato2', 'Lato', sans-serif;
+  font-size: 9pt;
+  line-height: 1.45;
+  color: var(--cvm-text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.cv-modern *,
+.cv-modern *::before,
+.cv-modern *::after {
+  box-sizing: border-box;
+}
+
+.cv-modern :is(h1, h2, p, ul, dl, dd) {
+  margin: 0;
+  padding: 0;
+}
+
+.cv-modern ul {
+  list-style: none;
+}
+
+/* ---------- Antraštės juosta ---------- */
+
+.cvm-band {
+  display: flex;
+  align-items: center;
+  gap: 7mm;
+  padding: 10mm 12mm;
+  background: var(--cvm-band);
+  color: var(--cvm-band-text);
+  break-inside: avoid;
+}
+
+.cvm-photo {
+  flex: 0 0 auto;
+  width: 30mm;
+  height: 30mm;
+  border-radius: 50%;
+  border: 0.9mm solid var(--cvm-accent);
+  object-fit: cover;
+}
+
+.cvm-band-text {
+  min-width: 0;
+}
+
+.cvm-name {
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 32pt;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cvm-band-strong);
+}
+
+.cvm-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4mm 6mm;
+  margin-top: 3.4mm;
+  font-size: 8.5pt;
+  line-height: 1.3;
+}
+
+.cvm-contacts li {
+  display: flex;
+  align-items: center;
+  gap: 1.8mm;
+}
+
+.cvm-contact-icon {
+  display: inline-flex;
+  font-size: 8.5pt;
+  color: var(--cvm-accent);
+}
+
+/* ---------- Skiltys ---------- */
+
+.cvm-body {
+  display: flex;
+  align-items: stretch;
+}
+
+.cvm-main,
+.cvm-aside {
+  padding-top: 9mm;
+  padding-bottom: 9mm;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.cvm-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 12mm;
+  padding-right: 8mm;
+}
+
+.cvm-aside {
+  flex: 0 0 var(--cvm-aside-w);
+  width: var(--cvm-aside-w);
+  padding-left: 8mm;
+  padding-right: 10mm;
+}
+
+.cv-modern .cvx-section + .cvx-section {
+  margin-top: 8mm;
+}
+
+.cv-modern .cvx-heading {
+  margin-bottom: 4mm;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 14pt;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--cvm-text);
+  break-after: avoid;
+}
+
+.cv-modern .cvx-heading::after {
+  content: '';
+  display: block;
+  width: 9mm;
+  height: 0.8mm;
+  margin-top: 1.3mm;
+  background: var(--cvm-accent);
+}
+
+.cv-modern .cvx-text {
+  color: var(--cvm-muted);
+  white-space: pre-line;
+}
+
+/* Žymos */
+.cv-modern .cvx-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6mm;
+}
+
+.cv-modern .cvx-tags li {
+  padding: 0.9mm 2.4mm;
+  border: 0.3mm solid var(--cvm-line);
+  border-radius: 1mm;
+  background: #fff;
+  font-size: 8.3pt;
+  line-height: 1.3;
+  break-inside: avoid;
+}
+
+.cvm-main .cvx-tags li {
+  border-color: transparent;
+  background: var(--cvm-tint);
+}
+
+/* Pavadinimas: reikšmė */
+.cv-modern .cvx-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2mm;
+}
+
+.cv-modern .cvx-kv-row {
+  break-inside: avoid;
+}
+
+.cv-modern .cvx-kv-label {
+  font-weight: 700;
+}
+
+.cv-modern .cvx-kv-value {
+  color: var(--cvm-muted);
+}
+
+/* Punktai */
+.cv-modern .cvx-bullets li {
+  position: relative;
+  padding-left: 3.3mm;
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: var(--cvm-muted);
+  break-inside: avoid;
+}
+
+.cv-modern .cvx-bullets li + li {
+  margin-top: 1.6mm;
+}
+
+.cv-modern .cvx-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0.2mm;
+  top: 0.55em;
+  width: 1.1mm;
+  height: 1.1mm;
+  border-radius: 50%;
+  background: var(--cvm-accent);
+}
+
+/* Laiko juosta: pagrindinė skiltis */
+.cvm-main .cvx-tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'title date'
+    'org org'
+    'bullets bullets';
+  column-gap: 4mm;
+  padding: 0 0 5.5mm 5mm;
+  border-left: 0.35mm solid var(--cvm-line);
+  break-inside: avoid;
+}
+
+.cvm-main .cvx-tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.cvm-main .cvx-tl-item::before {
+  content: '';
+  position: absolute;
+  left: -1.3mm;
+  top: 0.9mm;
+  width: 2.3mm;
+  height: 2.3mm;
+  border-radius: 50%;
+  background: var(--cvm-accent);
+}
+
+.cv-modern .cvx-tl-title {
+  grid-area: title;
+  font-weight: 700;
+  font-size: 9.2pt;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+}
+
+.cv-modern .cvx-tl-date {
+  grid-area: date;
+  font-size: 8.3pt;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--cvm-muted);
+}
+
+.cv-modern .cvx-tl-org {
+  grid-area: org;
+  margin-top: 0.4mm;
+  font-weight: 700;
+  font-size: 8.6pt;
+  color: var(--cvm-accent);
+}
+
+.cv-modern .cvx-tl .cvx-bullets {
+  grid-area: bullets;
+  margin-top: 2mm;
+}
+
+/* Laiko juosta: šoninė skiltis */
+.cv-modern .cvx-tl-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+
+.cv-modern .cvx-tl-compact .cvx-tl-item {
+  display: flex;
+  flex-direction: column;
+  break-inside: avoid;
+}
+
+.cv-modern .cvx-tl-compact .cvx-tl-date {
+  order: 3;
+}
+
+.cv-modern .cvx-tl-compact .cvx-bullets {
+  order: 4;
+}

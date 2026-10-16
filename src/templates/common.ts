@@ -39,3 +39,11 @@ export function cvFileName(data: CvData) {
   const { firstName, lastName } = data.personal;
   return [firstName, lastName, 'CV'].filter(Boolean).join('_').replace(/\s+/g, '_');
 }
+
+/** Sumaišo dvi #RRGGBB spalvas: t=0 grąžina `a`, t=1 grąžina `b`. Naudojama šviesiems atspalviams. */
+export function mixColor(a: string, b: string, t: number): string {
+  const pa = parseInt(a.slice(1), 16);
+  const pb = parseInt(b.slice(1), 16);
+  const ch = (shift: number) => Math.round(((pa >> shift) & 255) * (1 - t) + ((pb >> shift) & 255) * t);
+  return `#${((ch(16) << 16) | (ch(8) << 8) | ch(0)).toString(16).padStart(6, '0')}`;
+}

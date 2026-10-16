@@ -25,7 +25,7 @@
   }
 
   /* Paskutinis puslapis užpildomas fonu ant <html>, todėl paties CV aukščio neforsuojame. */
-  .print-root .cv-classic {
+  .print-root .cv-sheet {
     min-height: 0;
     background: transparent;
   }

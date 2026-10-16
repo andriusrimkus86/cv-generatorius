@@ -8,7 +8,7 @@ import { DEFAULT_TEMPLATE_ID } from '../templates/registry';
 import { DEFAULT_THEME_ID } from '../templates/themes';
 
 /**
- * Tik kūrimo režime: #/dev/print?variant=short|long&theme=...
+ * Tik kūrimo režime: #/dev/print?variant=short|long&template=...&theme=...
  * Naudojama PDF maketui tikrinti (headless Chrome --print-to-pdf) be IndexedDB.
  */
 export function PrintTest() {
@@ -26,7 +26,7 @@ export function PrintTest() {
       id: 'dev',
       profileId: 'dev',
       name: 'dev',
-      templateId: DEFAULT_TEMPLATE_ID,
+      templateId: params.get('template') ?? DEFAULT_TEMPLATE_ID,
       themeId: params.get('theme') ?? DEFAULT_THEME_ID,
       data,
       updatedAt: 0,

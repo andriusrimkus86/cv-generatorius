@@ -111,6 +111,69 @@
   gap: 2px;
 }
 
+/* ---------- Dizaino pasirinkimas ---------- */
+
+.design-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.design-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.design-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 6px 8px;
+  border: 2px solid var(--ui-border);
+  border-radius: 10px;
+  background: var(--ui-surface);
+  font: inherit;
+  font-size: 13px;
+  color: var(--ui-text);
+  cursor: pointer;
+}
+
+.design-option[aria-checked='true'] {
+  border-color: var(--ui-accent);
+  background: rgba(168, 137, 74, 0.08);
+  font-weight: 700;
+}
+
+.design-thumb {
+  display: block;
+  width: 100%;
+  max-width: 90px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(20, 30, 45, 0.25);
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.swatch {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--ui-border);
+  cursor: pointer;
+}
+
+.swatch[aria-checked='true'] {
+  box-shadow: 0 0 0 3px var(--ui-accent);
+}
+
 /* ---------- Kortelės ir sąrašai ---------- */
 
 .card-list,
