@@ -4,7 +4,7 @@ import type { TimelineItem } from '../../model/types';
 import { contactItems, cvFileName, visible } from '../common';
 import { CONTACT_ICON_PATHS } from '../pdfFonts';
 import { pdfBullets, PdfSections, type PdfSectionStyles } from '../shared/PdfSections';
-import type { TemplateProps, Theme } from '../types';
+import type { PdfTemplateProps, Theme } from '../types';
 import { MODERN_ASIDE_WIDTH, modernTint } from './ModernTemplate';
 
 /* „Modernus“ PDF versija. Matmenys sutampa su modern.css. */
@@ -75,7 +75,7 @@ const makeStyles = (t: Theme) => {
   return { base, main: section(false), side: section(true) };
 };
 
-export function ModernPdf({ data, theme }: TemplateProps) {
+export function ModernPdf({ data, theme, size }: PdfTemplateProps) {
   const { base: s, main, side } = makeStyles(theme);
   const { personal } = data;
   const contacts = contactItems(data);
@@ -108,7 +108,7 @@ export function ModernPdf({ data, theme }: TemplateProps) {
 
   return (
     <Document title={cvFileName(data).replace(/_/g, ' ')} author={`${personal.firstName} ${personal.lastName}`.trim()} language="lt">
-      <Page size="A4" style={s.page}>
+      <Page size={size ?? 'A4'} style={s.page}>
         <View fixed style={s.asideBg} />
         <View style={s.band} wrap={false}>
           {personal.photo && (

@@ -4,7 +4,7 @@ import { formatPeriod } from '../../model/dates';
 import type { Bullet, CvData, KeyValue, Placement, Section, TimelineItem } from '../../model/types';
 import { contactItems, cvFileName, licenceFields, nonEmpty, personalFields, visible } from '../common';
 import { CONTACT_ICON_PATHS } from '../pdfFonts';
-import type { Theme } from '../types';
+import type { PdfTemplateProps, Theme } from '../types';
 import { CLASSIC_SIDEBAR_WIDTH } from './ClassicTemplate';
 
 /*
@@ -108,7 +108,7 @@ type Styles = ReturnType<typeof makeStyles>;
 
 const ICONS = CONTACT_ICON_PATHS;
 
-export function ClassicPdf({ data, theme }: { data: CvData; theme: Theme }) {
+export function ClassicPdf({ data, theme, size }: PdfTemplateProps) {
   const s = makeStyles(theme);
   const sections = visible(data.sections);
   const { personal } = data;
@@ -141,7 +141,7 @@ export function ClassicPdf({ data, theme }: { data: CvData; theme: Theme }) {
 
   return (
     <Document title={cvFileName(data).replace(/_/g, ' ')} author={`${personal.firstName} ${personal.lastName}`.trim()} language="lt">
-      <Page size="A4" style={s.page}>
+      <Page size={size ?? 'A4'} style={s.page}>
         <View fixed style={s.sidebarBg} />
         <View style={s.columns}>
           <View style={s.sidebar}>

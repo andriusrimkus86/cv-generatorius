@@ -4,7 +4,7 @@ import type { TimelineItem } from '../../model/types';
 import { contactItems, cvFileName, visible } from '../common';
 import '../pdfFonts';
 import { pdfBullets, PdfSections, type PdfSectionStyles } from '../shared/PdfSections';
-import type { TemplateProps, Theme } from '../types';
+import type { PdfTemplateProps, Theme } from '../types';
 import { MINIMAL_ASIDE_WIDTH } from './MinimalTemplate';
 
 /* „Minimalus“ PDF versija. Matmenys sutampa su minimal.css. */
@@ -79,7 +79,7 @@ const makeStyles = (t: Theme) => {
   return { base, main: section(false), side: section(true) };
 };
 
-export function MinimalPdf({ data, theme }: TemplateProps) {
+export function MinimalPdf({ data, theme, size }: PdfTemplateProps) {
   const { base: s, main, side } = makeStyles(theme);
   const { personal } = data;
   const contacts = contactItems(data);
@@ -106,7 +106,7 @@ export function MinimalPdf({ data, theme }: TemplateProps) {
 
   return (
     <Document title={cvFileName(data).replace(/_/g, ' ')} author={`${personal.firstName} ${personal.lastName}`.trim()} language="lt">
-      <Page size="A4" style={s.page}>
+      <Page size={size ?? 'A4'} style={s.page}>
         <View style={s.header} wrap={false}>
           <View style={{ flexGrow: 1, flexBasis: 0 }}>
             <Text style={s.name}>

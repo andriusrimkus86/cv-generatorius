@@ -3,21 +3,30 @@ import { MinimalTemplate } from './minimal/MinimalTemplate';
 import { MODERN_ASIDE_WIDTH, ModernTemplate, modernTint } from './modern/ModernTemplate';
 import type { TemplateDef } from './types';
 
+const A4_WIDTH_MM = 210;
+const mm = (v: string) => parseFloat(v);
+
 export const TEMPLATES: TemplateDef[] = [
   {
     id: 'classic',
     name: 'Klasikinis: tamsi juosta kairėje',
     component: ClassicTemplate,
-    pageBackground: (t) =>
-      `linear-gradient(to right, ${t.sidebarBg} ${CLASSIC_SIDEBAR_WIDTH}, #fff ${CLASSIC_SIDEBAR_WIDTH})`,
+    pageBackground: (t, s = 1) => {
+      const x = `${mm(CLASSIC_SIDEBAR_WIDTH) * s}mm`;
+      return `linear-gradient(to right, ${t.sidebarBg} ${x}, #fff ${x})`;
+    },
+    rightEdge: () => '#ffffff',
     loadPdf: () => import('./classic/ClassicPdf').then((m) => m.ClassicPdf),
   },
   {
     id: 'modern',
     name: 'Modernus: tamsi antraštė, šviesi skiltis dešinėje',
     component: ModernTemplate,
-    pageBackground: (t) =>
-      `linear-gradient(to right, #fff calc(100% - ${MODERN_ASIDE_WIDTH}), ${modernTint(t)} calc(100% - ${MODERN_ASIDE_WIDTH}))`,
+    pageBackground: (t, s = 1) => {
+      const x = `${(A4_WIDTH_MM - mm(MODERN_ASIDE_WIDTH)) * s}mm`;
+      return `linear-gradient(to right, #fff ${x}, ${modernTint(t)} ${x})`;
+    },
+    rightEdge: (t) => modernTint(t),
     loadPdf: () => import('./modern/ModernPdf').then((m) => m.ModernPdf),
   },
   {
@@ -25,6 +34,7 @@ export const TEMPLATES: TemplateDef[] = [
     name: 'Minimalus: baltas su plonomis linijomis',
     component: MinimalTemplate,
     pageBackground: () => '#fff',
+    rightEdge: () => '#ffffff',
     loadPdf: () => import('./minimal/MinimalPdf').then((m) => m.MinimalPdf),
   },
 ];

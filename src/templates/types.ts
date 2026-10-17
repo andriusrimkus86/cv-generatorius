@@ -19,12 +19,23 @@ export interface TemplateProps {
   theme: Theme;
 }
 
+export interface PdfTemplateProps extends TemplateProps {
+  /** PDF puslapio dydis taškais [plotis, aukštis]. Numatytasis A4. */
+  size?: [number, number];
+}
+
 export interface TemplateDef {
   id: string;
   name: string;
   component: ComponentType<TemplateProps>;
-  /** Fono spalva, kuria spausdinant užpildomi visi puslapiai (kad šoninė juosta tęstųsi). */
-  pageBackground: (theme: Theme) => string;
+  /**
+   * Puslapio fonas spausdinant (kad šoninė juosta tęstųsi kiekviename puslapyje).
+   * `scale` < 1 naudojamas režimui „Sutalpinti į vieną A4“: turinys sumažintas ir prigludęs kairėje,
+   * o fonas dešinėje už turinio užpildomas `rightEdge` spalva.
+   */
+  pageBackground: (theme: Theme, scale?: number) => string;
+  /** Spalva, kuria užpildoma juosta dešinėje, kai sumažintas turinys neužpildo viso A4 pločio. */
+  rightEdge: (theme: Theme) => string;
   /** PDF versijos komponentas (react-pdf). Įkeliamas tik prireikus, nes biblioteka didelė. */
-  loadPdf: () => Promise<ComponentType<TemplateProps>>;
+  loadPdf: () => Promise<ComponentType<PdfTemplateProps>>;
 }

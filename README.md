@@ -44,20 +44,36 @@ npm run preview
 
 ## PDF išsaugojimas
 
-Paspauskite **PDF**. Programėlė pati sugeneruoja PDF failą (A4, tekstą galima pažymėti, šriftai įterpti).
-Tai veikia ir telefone, ir be interneto. Lange galima:
+Paspauskite **PDF** ir pasirinkite režimą. Paskutinis pasirinkimas įsimenamas šiame įrenginyje.
+
+| Režimas | Rezultatas |
+| --- | --- |
+| **Vienas ištisinis puslapis** (numatytasis) | Visada lygiai 1 puslapis: 210 mm pločio, aukštis lygus turinio aukščiui (ne mažiau nei 297 mm). |
+| **A4 puslapiais** | Standartiniai A4 puslapiai. Įrašai neperkerpami per vidurį, šoninė juosta tęsiasi kiekviename puslapyje. |
+| **Sutalpinti į vieną A4** | Jei turinys netelpa, jis proporcingai sumažinamas iki vieno A4. Kai mastelis mažesnis nei 80 %, rodomas įspėjimas. |
+
+Visais režimais tekstas lieka tekstas (jį galima pažymėti), šriftai įterpiami, o spalvos ir fonas išlieka.
+
+Lange galima:
 
 - **Atsisiųsti:** failas išsaugomas į „Atsisiuntimai“ (Downloads).
 - **Dalintis / išsaugoti…** (telefone): Android dalinimosi langas, pvz. į Google Drive, el. paštą ar Failus.
 - **Atidaryti:** peržiūrėti PDF naršyklėje.
-- **Spausdinti…** (kompiuteryje): senasis būdas per naršyklės spausdinimo langą. Paskirtis „Išsaugoti kaip PDF“,
-  pažymėkite „Fono grafika“. Įdiegtoje Android programėlėje spausdinimo langas neveikia.
+- **Spausdinti…** (kompiuteryje): naršyklės spausdinimo langas tuo pačiu režimu. Paskirtis „Išsaugoti kaip PDF“,
+  pažymėkite „Fono grafika“. Įdiegtoje Android programėlėje šis mygtukas nerodomas, nes `window.print()` ten neveikia.
 
-PDF kuria `@react-pdf/renderer` pagal `src/templates/classic/ClassicPdf.tsx`. Šis failas turi atitikti ekrano
-šabloną `ClassicTemplate.tsx` ir `classic.css`, todėl keičiant dizainą reikia keisti abu.
+### Kaip tai veikia
 
-Ilgas CV automatiškai persikelia į antrą puslapį. Įrašai nėra perkerpami per vidurį, o tamsi šoninė juosta
-tęsiasi visuose puslapiuose. Peržiūroje raudona brūkšninė linija rodo apytikslę puslapio ribą.
+- **Atsisiunčiamas PDF** generuojamas tiesiogiai naršyklėje (`src/pdf/generatePdf.ts`), todėl veikia ir Android programėlėje,
+  ir be interneto. Maketą sukuria `@react-pdf/renderer` pagal `src/templates/*/…Pdf.tsx`, o `pdf-lib` naudojamas
+  puslapiams skaičiuoti ir režimui „Sutalpinti“: ištisinis puslapis įdedamas į A4 kaip vektorinis objektas.
+  Ištisinio puslapio aukštis pirmiausia išmatuojamas iš ekrano šablono. Jei PDF makete turinys netelpa, aukštis didinamas,
+  kol gaunamas lygiai 1 puslapis.
+- **Spausdinimas** (`src/preview/print.ts`) prieš `window.print()` įterpia `@page { size: 210mm <aukštis>mm }`.
+  Režimui „Sutalpinti“ naudojamas `@page A4` ir CSS `zoom`.
+- PDF šablonai (`…Pdf.tsx`) turi atitikti ekrano šablonus (`…Template.tsx` ir CSS), todėl keičiant dizainą reikia keisti abu.
+
+Peržiūroje raudona brūkšninė linija rodo apytikslę A4 puslapio ribą.
 
 ## Pirmas paleidimas
 
